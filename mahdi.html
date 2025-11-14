@@ -211,6 +211,9 @@
             transition: all 0.3s ease;
             position: relative;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
         }
 
         .dark-mode {
@@ -1284,381 +1287,378 @@
             font-size: 0.9rem;
         }
 
+        /* Mobile Performance Optimizations */
         @media (max-width: 768px) {
+            * {
+                -webkit-tap-highlight-color: transparent;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+            
+            input, textarea, select {
+                -webkit-user-select: text;
+                -moz-user-select: text;
+                -ms-user-select: text;
+                user-select: text;
+            }
+            
             .container {
-                padding: 10px;
+                padding: 8px;
+                will-change: transform;
             }
             
             .header {
-                padding: 20px 15px;
-                margin-bottom: 20px;
+                padding: 15px 10px;
+                margin-bottom: 15px;
+                will-change: transform;
             }
             
             .contact-info {
                 flex-direction: column;
                 align-items: center;
-                gap: 10px;
+                gap: 8px;
             }
             
             .contact-item {
-                padding: 8px 15px;
-                font-size: 0.9rem;
+                padding: 6px 12px;
+                font-size: 0.85rem;
+                min-height: 36px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
             
             .site-title {
-                font-size: 1.8rem;
+                font-size: 1.6rem;
+                line-height: 1.2;
             }
             
             .logo {
-                width: 60px;
-                height: 60px;
+                width: 50px;
+                height: 50px;
             }
             
             .section {
-                padding: 20px 15px;
-                margin-bottom: 20px;
+                padding: 15px 10px;
+                margin-bottom: 15px;
+                will-change: transform;
             }
             
             .section-title {
-                font-size: 1.5rem;
-                margin-bottom: 15px;
+                font-size: 1.3rem;
+                margin-bottom: 12px;
+                line-height: 1.3;
             }
             
             .game-grid {
-                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-                gap: 10px;
-                max-height: 250px;
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: 8px;
+                max-height: 200px;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
             }
             
             .game-item {
-                padding: 10px;
-                font-size: 0.9rem;
+                padding: 8px;
+                font-size: 0.8rem;
+                min-height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                line-height: 1.2;
+                cursor: pointer;
+                -webkit-tap-highlight-color: rgba(116, 185, 255, 0.3);
             }
 
             .dns-servers {
                 grid-template-columns: 1fr;
-                gap: 10px;
+                gap: 8px;
             }
             
             .dns-pair {
-                padding: 15px;
-                margin-bottom: 10px;
+                padding: 12px;
+                margin-bottom: 8px;
             }
             
             .dns-pair-title {
-                font-size: 1rem;
-                margin-bottom: 10px;
+                font-size: 0.9rem;
+                margin-bottom: 8px;
+                line-height: 1.3;
             }
             
             .dns-server {
-                padding: 12px;
+                padding: 10px;
+                margin-bottom: 6px;
             }
             
             .dns-server-value {
-                font-size: 0.95rem;
+                font-size: 0.8rem;
                 word-break: break-all;
-                line-height: 1.3;
+                line-height: 1.2;
+                padding: 6px;
+                background: rgba(0, 0, 0, 0.2);
+                border-radius: 4px;
+                font-family: 'Courier New', monospace;
             }
 
             .status-info {
                 grid-template-columns: 1fr;
+                gap: 8px;
             }
             
             .ad-features {
-                gap: 10px;
+                gap: 8px;
                 flex-direction: column;
                 align-items: center;
             }
             
             .ad-feature {
-                padding: 8px 12px;
-                min-width: 200px;
+                padding: 6px 10px;
+                min-width: 180px;
+                font-size: 0.8rem;
             }
             
             .ad-buttons {
                 flex-direction: column;
-                gap: 10px;
+                gap: 8px;
             }
             
             .ad-btn-primary, .ad-btn-secondary {
                 min-width: 100%;
-                padding: 12px 20px;
-                font-size: 0.9rem;
+                padding: 10px 15px;
+                font-size: 0.85rem;
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
             
             .form-input, .form-select {
                 font-size: 16px; /* Prevent zoom on iOS */
-                padding: 15px 12px;
+                padding: 12px 10px;
+                min-height: 44px;
+                border-radius: 8px;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
             }
             
             .btn {
                 width: 100%;
                 height: auto;
-                padding: 15px;
-                margin: 10px 0;
-                min-height: 50px;
+                padding: 12px;
+                margin: 8px 0;
+                min-height: 48px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                border-radius: 10px;
+                will-change: transform;
+                -webkit-tap-highlight-color: rgba(116, 185, 255, 0.3);
             }
             
             .btn strong {
-                font-size: 14px;
+                font-size: 13px;
                 text-align: center;
-            }
-            
-            /* Device-specific button improvements */
-            .device-mobile .btn {
-                padding: 18px 15px;
-                min-height: 55px;
-                border-radius: 12px;
-                font-size: 16px;
-            }
-            
-            .device-mobile .btn strong {
-                font-size: 15px;
                 line-height: 1.3;
             }
             
-            .device-tablet .btn {
-                padding: 16px 20px;
-                min-height: 52px;
+            /* Device-specific optimizations */
+            .device-mobile .btn {
+                padding: 14px 12px;
+                min-height: 50px;
+                border-radius: 10px;
+                font-size: 16px;
+                transform: translateZ(0);
+                -webkit-transform: translateZ(0);
             }
             
-            .device-desktop .btn {
-                width: 13rem;
-                height: 3rem;
-                padding: 15px;
-                margin: 10px 5px;
+            .device-mobile .btn:active {
+                transform: scale(0.98) translateZ(0);
+                -webkit-transform: scale(0.98) translateZ(0);
+            }
+            
+            .device-mobile .btn strong {
+                font-size: 14px;
+                line-height: 1.2;
+            }
+            
+            .device-tablet .btn {
+                padding: 14px 18px;
+                min-height: 48px;
             }
             
             .hamburger-menu {
-                width: 50px;
-                height: 50px;
-                top: 15px;
-                left: 15px;
+                width: 45px;
+                height: 45px;
+                top: 12px;
+                left: 12px;
+                -webkit-tap-highlight-color: rgba(116, 185, 255, 0.3);
             }
             
             .theme-toggle {
-                width: 50px;
-                height: 50px;
-                top: 15px;
-                right: 15px;
-                font-size: 1.2rem;
+                width: 45px;
+                height: 45px;
+                top: 12px;
+                right: 12px;
+                font-size: 1.1rem;
+                -webkit-tap-highlight-color: rgba(116, 185, 255, 0.3);
             }
             
             .sidebar {
-                width: 280px;
-                left: -280px;
+                width: 260px;
+                left: -260px;
+                will-change: transform;
+                -webkit-transform: translateZ(0);
+                transform: translateZ(0);
+            }
+            
+            .sidebar.open {
+                -webkit-transform: translateX(260px) translateZ(0);
+                transform: translateX(260px) translateZ(0);
             }
             
             .radio-container {
-                margin: 15px;
-                padding-left: 0.3rem;
+                margin: 12px;
+                padding-left: 0.2rem;
             }
             
             .radio-container label {
-                padding: 0.8rem 1rem;
-                font-size: 1rem;
+                padding: 0.7rem 0.8rem;
+                font-size: 0.9rem;
+                min-height: 40px;
+                -webkit-tap-highlight-color: rgba(116, 185, 255, 0.3);
             }
             
             .menu-icon {
-                font-size: 1.1rem;
-                width: 20px;
+                font-size: 1rem;
+                width: 18px;
             }
             
             .footer {
-                padding: 20px 15px;
-                margin-top: 30px;
+                padding: 15px 10px;
+                margin-top: 20px;
             }
             
             .footer-section {
-                margin-bottom: 15px;
+                margin-bottom: 12px;
             }
             
             .footer-title {
-                font-size: 1.1rem;
+                font-size: 1rem;
             }
             
             /* DNS Result Mobile Optimization */
             .dns-result {
-                padding: 12px;
-                margin-top: 15px;
-                border-radius: 15px;
+                padding: 10px;
+                margin-top: 12px;
+                border-radius: 12px;
             }
             
             .dns-result h3 {
-                font-size: 1.2rem;
-                margin-bottom: 15px;
+                font-size: 1.1rem;
+                margin-bottom: 12px;
                 text-align: center;
-                line-height: 1.4;
+                line-height: 1.3;
                 color: #74b9ff;
             }
             
-            /* DNS List Container Mobile */
-            .dns-result > div {
-                padding: 12px;
-                margin-bottom: 12px;
-                border-radius: 12px;
-            }
-            
-            /* DNS Pair Mobile Layout - Stack vertically */
+            /* DNS Pair Mobile Layout - Optimized */
             .device-mobile .dns-pair {
                 background: rgba(255, 255, 255, 0.1);
-                border-radius: 12px;
-                padding: 12px;
-                margin-bottom: 10px;
+                border-radius: 10px;
+                padding: 10px;
+                margin-bottom: 8px;
                 border: 1px solid rgba(255, 255, 255, 0.2);
+                will-change: transform;
             }
             
             .device-mobile .dns-pair-title {
-                font-size: 0.95rem;
-                margin-bottom: 10px;
+                font-size: 0.85rem;
+                margin-bottom: 8px;
                 text-align: center;
                 color: #74b9ff;
                 font-weight: bold;
+                line-height: 1.2;
             }
             
-            /* DNS Server Mobile Layout - Full width stacked */
+            /* DNS Server Mobile Layout - Optimized */
             .device-mobile .dns-server {
                 background: rgba(255, 255, 255, 0.08);
-                border-radius: 8px;
-                padding: 10px;
-                margin-bottom: 8px;
+                border-radius: 6px;
+                padding: 8px;
+                margin-bottom: 6px;
                 border: 1px solid rgba(255, 255, 255, 0.15);
                 width: 100%;
             }
             
             .device-mobile .dns-server-label {
-                font-size: 0.8rem;
+                font-size: 0.75rem;
                 opacity: 0.8;
-                margin-bottom: 5px;
+                margin-bottom: 4px;
                 text-align: center;
             }
             
             .device-mobile .dns-server-value {
-                font-size: 0.85rem;
+                font-size: 0.8rem;
                 font-weight: bold;
-                margin-bottom: 8px;
+                margin-bottom: 6px;
                 word-break: break-all;
                 font-family: 'Courier New', monospace;
-                line-height: 1.3;
+                line-height: 1.2;
                 color: #00b894;
                 background: rgba(0, 0, 0, 0.3);
-                padding: 8px;
-                border-radius: 6px;
+                padding: 6px;
+                border-radius: 4px;
                 text-align: center;
-                letter-spacing: 0.5px;
+                letter-spacing: 0.3px;
             }
             
             .device-mobile .dns-ping {
                 display: flex;
                 align-items: center;
-                gap: 6px;
-                font-size: 0.8rem;
+                gap: 4px;
+                font-size: 0.75rem;
                 justify-content: center;
-                margin-top: 5px;
+                margin-top: 4px;
             }
             
             .device-mobile .ping-indicator {
-                width: 8px;
-                height: 8px;
+                width: 6px;
+                height: 6px;
             }
             
-            /* Tablet optimizations */
-            .device-tablet .dns-pair {
-                padding: 15px;
+            /* Performance optimizations */
+            .device-mobile * {
+                will-change: auto;
             }
             
-            .device-tablet .dns-server-value {
-                font-size: 0.9rem;
+            .device-mobile .btn,
+            .device-mobile .game-item,
+            .device-mobile .contact-item,
+            .device-mobile .radio-container label {
+                will-change: transform;
             }
             
-            /* Desktop keeps original styling */
-            .device-desktop .dns-servers {
-                grid-template-columns: 1fr 1fr;
+            /* Smooth scrolling */
+            .game-grid,
+            .sidebar {
+                -webkit-overflow-scrolling: touch;
+                scroll-behavior: smooth;
             }
             
-            /* Instructions Mobile */
-            .dns-result div[style*="background: rgba(116, 185, 255, 0.2)"] {
-                padding: 12px;
-                margin-top: 15px;
-                border-radius: 8px;
-                font-size: 0.9rem;
-                line-height: 1.5;
+            /* Reduce animations on mobile for better performance */
+            .device-mobile .btn-stars,
+            .device-mobile .btn-glow {
+                display: none;
             }
             
-            /* Speed Test Results Mobile */
-            .speed-test-result {
-                padding: 20px 15px;
-            }
-            
-            .speed-test-result > div[style*="display: grid"] {
-                grid-template-columns: 1fr;
-                gap: 10px;
-            }
-            
-            .speed-test-result > div[style*="display: grid"] > div {
-                padding: 12px;
-                text-align: center;
-            }
-            
-            /* AI Response Mobile */
-            #aiContent {
-                font-size: 0.9rem;
-                line-height: 1.6;
-            }
-            
-            #aiContent h4 {
-                font-size: 1.1rem;
-                margin-bottom: 10px;
-            }
-            
-            #aiContent ul {
-                padding-right: 15px;
-                margin: 10px 0;
-            }
-            
-            #aiContent li {
-                margin-bottom: 8px;
-                line-height: 1.5;
-            }
-            
-            /* Tutorial Mobile */
-            .tutorial-result {
-                padding: 15px;
-            }
-            
-            .tutorial-result div[style*="margin-bottom: 15px"] {
-                margin-bottom: 10px;
-                padding: 8px;
-                border-radius: 6px;
-                font-size: 0.9rem;
-                line-height: 1.4;
-            }
-            
-            /* Ping Test Mobile */
-            .ping-test-progress {
-                padding: 15px;
-                margin: 15px 0;
-            }
-            
-            .ping-test-progress > div {
-                padding: 15px;
-            }
-            
-            .ping-test-progress div[style*="display: flex"] {
-                flex-direction: column;
-                gap: 10px;
-                text-align: center;
-            }
-            
-            .ping-test-progress div[style*="display: flex"] > div:first-child {
-                order: 2;
-            }
-            
-            .ping-test-progress div[style*="display: flex"] > div:last-child {
-                order: 1;
+            .device-mobile .btn-container-stars {
+                display: none;
             }
         }
         
@@ -2497,14 +2497,92 @@
             const sidebar = document.getElementById('sidebar');
             const hamburger = document.querySelector('.hamburger-menu');
             
-            sidebar.classList.toggle('open');
-            hamburger.classList.toggle('menu-open');
+            // Performance optimization: Use requestAnimationFrame for smooth animation
+            requestAnimationFrame(() => {
+                const isOpen = sidebar.classList.contains('open');
+                
+                if (isOpen) {
+                    sidebar.classList.remove('open');
+                    hamburger.classList.remove('menu-open');
+                } else {
+                    sidebar.classList.add('open');
+                    hamburger.classList.add('menu-open');
+                    
+                    // Provide haptic feedback on mobile
+                    if (deviceType === 'mobile' && navigator.vibrate) {
+                        navigator.vibrate(30);
+                    }
+                }
+                
+                // Add backdrop for mobile
+                if (deviceType === 'mobile') {
+                    let backdrop = document.querySelector('.menu-backdrop');
+                    
+                    if (!isOpen) {
+                        // Create backdrop
+                        if (!backdrop) {
+                            backdrop = document.createElement('div');
+                            backdrop.className = 'menu-backdrop';
+                            backdrop.style.cssText = `
+                                position: fixed;
+                                top: 0;
+                                left: 0;
+                                width: 100%;
+                                height: 100%;
+                                background: rgba(0, 0, 0, 0.5);
+                                z-index: 998;
+                                opacity: 0;
+                                transition: opacity 0.3s ease;
+                            `;
+                            backdrop.onclick = toggleMenu;
+                            document.body.appendChild(backdrop);
+                        }
+                        
+                        // Show backdrop
+                        setTimeout(() => {
+                            backdrop.style.opacity = '1';
+                        }, 10);
+                        
+                    } else if (backdrop) {
+                        // Hide backdrop
+                        backdrop.style.opacity = '0';
+                        setTimeout(() => {
+                            if (backdrop.parentNode) {
+                                backdrop.parentNode.removeChild(backdrop);
+                            }
+                        }, 300);
+                    }
+                }
+            });
         }
 
         function toggleTheme() {
             isDarkMode = !isDarkMode;
-            document.body.classList.toggle('dark-mode');
-            document.querySelector('.theme-toggle').textContent = isDarkMode ? '☀️' : '🌙';
+            
+            // Performance optimization: Use requestAnimationFrame for smooth transition
+            requestAnimationFrame(() => {
+                document.body.classList.toggle('dark-mode');
+                const themeToggle = document.querySelector('.theme-toggle');
+                themeToggle.textContent = isDarkMode ? '☀️' : '🌙';
+                
+                // Provide haptic feedback on mobile
+                if (deviceType === 'mobile' && navigator.vibrate) {
+                    navigator.vibrate(50);
+                }
+                
+                // Show notification
+                showNotification(
+                    isDarkMode ? '🌙 حالت تاریک فعال شد' : '☀️ حالت روشن فعال شد',
+                    'info'
+                );
+                
+                // Save theme preference
+                try {
+                    localStorage.setItem('academi-theme', isDarkMode ? 'dark' : 'light');
+                } catch (e) {
+                    console.log('Could not save theme preference');
+                }
+            });
         }
 
         function showSection(sectionName) {
@@ -2773,11 +2851,28 @@
         }
 
         function selectGame(game, element) {
-            document.querySelectorAll('.game-item').forEach(item => {
-                item.classList.remove('selected');
-            });
+            // Performance optimization: Use more efficient DOM selection
+            const gameItems = document.querySelectorAll('.game-item');
+            
+            // Remove selected class from all items efficiently
+            for (let i = 0; i < gameItems.length; i++) {
+                gameItems[i].classList.remove('selected');
+            }
+            
+            // Add selected class to current element
             element.classList.add('selected');
             selectedGame = game;
+            
+            // Provide visual feedback for mobile users
+            if (deviceType === 'mobile') {
+                element.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    element.style.transform = '';
+                }, 150);
+            }
+            
+            // Show notification for better UX
+            showNotification(`🎮 بازی "${game}" انتخاب شد`, 'success');
         }
 
         let userInternetInfo = {
@@ -3080,39 +3175,53 @@
             // تشخیص نوع دستگاه واقعی کاربر
             const realDeviceInfo = getRealDeviceInfo();
             
-            container.innerHTML = `
-                <h3 style="color: #74b9ff; margin-bottom: 20px;">${title}</h3>
-                <div style="background: rgba(116, 185, 255, 0.1); border-radius: 10px; padding: 12px; margin-bottom: 15px; text-align: center; border: 1px solid rgba(116, 185, 255, 0.3);">
-                    <div style="font-size: 0.9rem; opacity: 0.9;">
+            // Performance optimization: Use DocumentFragment for better DOM manipulation
+            const fragment = document.createDocumentFragment();
+            
+            // Create header
+            const header = document.createElement('div');
+            header.innerHTML = `
+                <h3 style="color: #74b9ff; margin-bottom: 15px; font-size: ${realDeviceInfo.type === 'mobile' ? '1.1rem' : '1.5rem'};">${title}</h3>
+                <div style="background: rgba(116, 185, 255, 0.1); border-radius: 8px; padding: ${realDeviceInfo.type === 'mobile' ? '8px' : '12px'}; margin-bottom: 12px; text-align: center; border: 1px solid rgba(116, 185, 255, 0.3);">
+                    <div style="font-size: ${realDeviceInfo.type === 'mobile' ? '0.8rem' : '0.9rem'}; opacity: 0.9; line-height: 1.3;">
                         🖥️ دستگاه شما: ${realDeviceInfo.displayName} | 
                         🎯 انتخاب شده: ${deviceName} | 
                         🎮 بازی: ${gameName}
                     </div>
                 </div>
             `;
+            fragment.appendChild(header);
             
             // نمایش DNS ها به صورت جفت (Primary & Secondary)
-            const actualPairsCount = dnsServers.length; // تعداد جفت‌ها برابر تعداد DNS های انتخابی
+            const actualPairsCount = dnsServers.length;
             
             const dnsListContainer = document.createElement('div');
+            dnsListContainer.className = 'dns-list-container';
             dnsListContainer.style.cssText = `
                 background: rgba(255, 255, 255, 0.1);
-                border-radius: 15px;
-                padding: 20px;
-                margin-bottom: 20px;
+                border-radius: ${realDeviceInfo.type === 'mobile' ? '10px' : '15px'};
+                padding: ${realDeviceInfo.type === 'mobile' ? '12px' : '20px'};
+                margin-bottom: 15px;
                 border: 2px solid rgba(255, 255, 255, 0.2);
             `;
             
-            dnsListContainer.innerHTML = `
-                <div style="font-size: 1.2rem; font-weight: bold; color: #74b9ff; margin-bottom: 15px; text-align: center;">
-                    🎮 ${actualPairsCount} جفت DNS مخصوص ${gameName} - ${deviceName}
-                </div>
+            const dnsTitle = document.createElement('div');
+            dnsTitle.style.cssText = `
+                font-size: ${realDeviceInfo.type === 'mobile' ? '1rem' : '1.2rem'};
+                font-weight: bold;
+                color: #74b9ff;
+                margin-bottom: 12px;
+                text-align: center;
+                line-height: 1.3;
             `;
+            dnsTitle.textContent = `🎮 ${actualPairsCount} جفت DNS مخصوص ${gameName} - ${deviceName}`;
+            dnsListContainer.appendChild(dnsTitle);
             
-            // نمایش DNS ها به صورت جفت - هر DNS یک جفت کامل
+            // نمایش DNS ها به صورت جفت - بهینه‌سازی شده
+            const dnsFragment = document.createDocumentFragment();
+            
             for (let i = 0; i < dnsServers.length; i++) {
                 const primaryDNS = dnsServers[i];
-                // برای هر DNS، یک DNS ثانویه مناسب انتخاب کن
                 const secondaryDNS = generateSecondaryDNS(primaryDNS, dnsServers);
                 const pairNumber = i + 1;
                 
@@ -3121,73 +3230,66 @@
                     const secondaryPing = generateAccuratePing(secondaryDNS, userInternetInfo.ping);
                     
                     const dnsPair = document.createElement('div');
+                    dnsPair.className = 'dns-pair';
                     dnsPair.style.cssText = `
                         background: rgba(255, 255, 255, 0.1);
-                        border-radius: 15px;
-                        padding: 20px;
-                        margin-bottom: 15px;
-                        border: 2px solid rgba(255, 255, 255, 0.2);
+                        border-radius: ${realDeviceInfo.type === 'mobile' ? '8px' : '12px'};
+                        padding: ${realDeviceInfo.type === 'mobile' ? '10px' : '15px'};
+                        margin-bottom: ${realDeviceInfo.type === 'mobile' ? '8px' : '12px'};
+                        border: 1px solid rgba(255, 255, 255, 0.2);
                     `;
                     
                     // تنظیم نمایش بر اساس نوع دستگاه واقعی
                     const isRealMobile = realDeviceInfo.type === 'mobile';
                     const gridColumns = isRealMobile ? '1fr' : '1fr 1fr';
-                    const serverPadding = isRealMobile ? '10px' : '15px';
-                    const fontSize = isRealMobile ? '0.85rem' : '1.1rem';
+                    const fontSize = isRealMobile ? '0.75rem' : '1rem';
                     
                     dnsPair.innerHTML = `
-                        <div class="dns-pair-title">🎯 DNS جفت ${pairNumber} - ${gameName}</div>
-                        <div class="dns-servers" style="grid-template-columns: ${gridColumns};">
-                            <div class="dns-server">
-                                <div class="dns-server-label">DNS اولیه (Primary)</div>
-                                <div class="dns-server-value" style="font-size: ${fontSize};">
+                        <div class="dns-pair-title" style="font-size: ${isRealMobile ? '0.85rem' : '1rem'}; margin-bottom: ${isRealMobile ? '6px' : '10px'}; text-align: center; color: #74b9ff; font-weight: bold; line-height: 1.2;">
+                            🎯 DNS جفت ${pairNumber} - ${gameName}
+                        </div>
+                        <div class="dns-servers" style="display: grid; grid-template-columns: ${gridColumns}; gap: ${isRealMobile ? '6px' : '10px'};">
+                            <div class="dns-server" style="background: rgba(255, 255, 255, 0.08); border-radius: ${isRealMobile ? '6px' : '8px'}; padding: ${isRealMobile ? '8px' : '12px'}; border: 1px solid rgba(255, 255, 255, 0.15);">
+                                <div class="dns-server-label" style="font-size: ${isRealMobile ? '0.7rem' : '0.85rem'}; opacity: 0.8; margin-bottom: ${isRealMobile ? '3px' : '5px'}; text-align: center;">DNS اولیه (Primary)</div>
+                                <div class="dns-server-value" style="font-size: ${fontSize}; font-weight: bold; margin-bottom: ${isRealMobile ? '4px' : '8px'}; word-break: break-all; font-family: 'Courier New', monospace; line-height: 1.2; color: #00b894; background: rgba(0, 0, 0, 0.3); padding: ${isRealMobile ? '4px' : '6px'}; border-radius: 4px; text-align: center;">
                                     ${primaryDNS}
                                 </div>
-                                <div class="dns-ping">
-                                    <span class="ping-indicator ${getPingClass(primaryPing)}"></span>
+                                <div class="dns-ping" style="display: flex; align-items: center; gap: ${isRealMobile ? '3px' : '6px'}; font-size: ${isRealMobile ? '0.7rem' : '0.8rem'}; justify-content: center;">
+                                    <span class="ping-indicator ${getPingClass(primaryPing)}" style="width: ${isRealMobile ? '6px' : '8px'}; height: ${isRealMobile ? '6px' : '8px'}; border-radius: 50%; display: inline-block;"></span>
                                     <span style="font-weight: bold;">پینگ: ${primaryPing}ms</span>
                                 </div>
-                                ${isRealMobile ? `<div style="font-size: 0.75rem; opacity: 0.7; margin-top: 5px; text-align: center;">
-                                    ${gameName} - ${deviceName}
-                                </div>` : `<div style="font-size: 0.8rem; opacity: 0.7; margin-top: 5px;">
-                                    بازی: ${gameName}<br>
-                                    دستگاه: ${deviceName}
-                                </div>`}
                             </div>
-                            <div class="dns-server">
-                                <div class="dns-server-label">DNS ثانویه (Secondary)</div>
-                                <div class="dns-server-value" style="font-size: ${fontSize};">
+                            <div class="dns-server" style="background: rgba(255, 255, 255, 0.08); border-radius: ${isRealMobile ? '6px' : '8px'}; padding: ${isRealMobile ? '8px' : '12px'}; border: 1px solid rgba(255, 255, 255, 0.15);">
+                                <div class="dns-server-label" style="font-size: ${isRealMobile ? '0.7rem' : '0.85rem'}; opacity: 0.8; margin-bottom: ${isRealMobile ? '3px' : '5px'}; text-align: center;">DNS ثانویه (Secondary)</div>
+                                <div class="dns-server-value" style="font-size: ${fontSize}; font-weight: bold; margin-bottom: ${isRealMobile ? '4px' : '8px'}; word-break: break-all; font-family: 'Courier New', monospace; line-height: 1.2; color: #74b9ff; background: rgba(0, 0, 0, 0.3); padding: ${isRealMobile ? '4px' : '6px'}; border-radius: 4px; text-align: center;">
                                     ${secondaryDNS}
                                 </div>
-                                <div class="dns-ping">
-                                    <span class="ping-indicator ${getPingClass(secondaryPing)}"></span>
+                                <div class="dns-ping" style="display: flex; align-items: center; gap: ${isRealMobile ? '3px' : '6px'}; font-size: ${isRealMobile ? '0.7rem' : '0.8rem'}; justify-content: center;">
+                                    <span class="ping-indicator ${getPingClass(secondaryPing)}" style="width: ${isRealMobile ? '6px' : '8px'}; height: ${isRealMobile ? '6px' : '8px'}; border-radius: 50%; display: inline-block;"></span>
                                     <span style="font-weight: bold;">پینگ: ${secondaryPing}ms</span>
                                 </div>
-                                ${isRealMobile ? `<div style="font-size: 0.75rem; opacity: 0.7; margin-top: 5px; text-align: center;">
-                                    ${gameName} - ${deviceName}
-                                </div>` : `<div style="font-size: 0.8rem; opacity: 0.7; margin-top: 5px;">
-                                    بازی: ${gameName}<br>
-                                    دستگاه: ${deviceName}
-                                </div>`}
                             </div>
                         </div>
                     `;
                     
-                    dnsListContainer.appendChild(dnsPair);
+                    dnsFragment.appendChild(dnsPair);
                 }
             }
             
-            container.appendChild(dnsListContainer);
+            dnsListContainer.appendChild(dnsFragment);
+            fragment.appendChild(dnsListContainer);
             
-            // راهنمای استفاده
+            // راهنمای استفاده - بهینه‌سازی شده
             const instructions = document.createElement('div');
             instructions.style.cssText = `
                 background: rgba(116, 185, 255, 0.2);
-                border-radius: 10px;
-                padding: 15px;
-                margin-top: 20px;
+                border-radius: ${realDeviceInfo.type === 'mobile' ? '8px' : '10px'};
+                padding: ${realDeviceInfo.type === 'mobile' ? '10px' : '15px'};
+                margin-top: 15px;
                 border: 1px solid rgba(116, 185, 255, 0.5);
                 color: white;
+                font-size: ${realDeviceInfo.type === 'mobile' ? '0.8rem' : '0.9rem'};
+                line-height: 1.4;
             `;
             instructions.innerHTML = `
                 <strong>🎮 نحوه استفاده ${actualPairsCount} جفت DNS برای ${gameName}:</strong><br>
@@ -3198,20 +3300,23 @@
                 • مخصوص بازی ${gameName} روی ${deviceName} بهینه‌سازی شده<br>
                 ${actualPairsCount > 1 ? '• در صورت مشکل با یک جفت، از جفت بعدی استفاده کنید' : ''}
             `;
-            container.appendChild(instructions);
+            fragment.appendChild(instructions);
             
+            // Clear container and append optimized content
+            container.innerHTML = '';
+            container.appendChild(fragment);
             container.style.display = 'block';
         }
 
         function generateGamingDNS() {
             if (!selectedGame) {
-                showNotification('لطفاً ابتدا یک بازی انتخاب کنید');
+                showNotification('لطفاً ابتدا یک بازی انتخاب کنید', 'warning');
                 return;
             }
             
             const device = document.getElementById('deviceSelect').value;
             if (!device) {
-                showNotification('لطفاً ابتدا دستگاه خود را انتخاب کنید');
+                showNotification('لطفاً ابتدا دستگاه خود را انتخاب کنید', 'warning');
                 return;
             }
             
@@ -3220,21 +3325,29 @@
             
             // نمایش پیام تولید DNS جدید
             const realDeviceInfo = getRealDeviceInfo();
-            showNotification(`🔄 تولید ${dnsCount} DNS یکتا برای ${selectedGame} روی ${realDeviceInfo.displayName}...`);
+            showNotification(`🔄 تولید ${dnsCount} DNS یکتا برای ${selectedGame} روی ${realDeviceInfo.displayName}...`, 'info');
             
-            // Check if All Games is selected
-            if (selectedGame === 'All Games') {
-                const allGamesDNS = generateAllGamesDNS(dnsType, dnsCount);
-                displayAllGamesDNSResult('gamingResult', allGamesDNS, `DNS مخصوص همه گیم‌ها (${device.toUpperCase()})`);
-            } else {
-                const dnsServers = generateRandomDNS(dnsType, dnsCount, device);
-                displayDNSResult('gamingResult', dnsServers, `DNS مخصوص ${selectedGame} (${device.toUpperCase()})`);
-            }
-            
-            // نمایش پیام موفقیت
-            setTimeout(() => {
-                showNotification(`✅ ${dnsCount} DNS یکتا برای ${selectedGame} آماده شد!`);
-            }, 500);
+            // Performance optimization: Use requestAnimationFrame for smooth UI updates
+            requestAnimationFrame(() => {
+                try {
+                    // Check if All Games is selected
+                    if (selectedGame === 'All Games') {
+                        const allGamesDNS = generateAllGamesDNS(dnsType, dnsCount);
+                        displayAllGamesDNSResult('gamingResult', allGamesDNS, `DNS مخصوص همه گیم‌ها (${device.toUpperCase()})`);
+                    } else {
+                        const dnsServers = generateRandomDNS(dnsType, dnsCount, device);
+                        displayDNSResult('gamingResult', dnsServers, `DNS مخصوص ${selectedGame} (${device.toUpperCase()})`);
+                    }
+                    
+                    // نمایش پیام موفقیت
+                    setTimeout(() => {
+                        showNotification(`✅ ${dnsCount} DNS یکتا برای ${selectedGame} آماده شد!`, 'success');
+                    }, 300);
+                } catch (error) {
+                    console.error('Error generating gaming DNS:', error);
+                    showNotification('خطا در تولید DNS. لطفاً مجدد تلاش کنید.', 'error');
+                }
+            });
         }
 
         function generateAllGamesDNS(type, count) {
@@ -3266,6 +3379,24 @@
                 ]
             };
             
+            // اگر نوع ترکیبی انتخاب شده، نیمی IPv4 و نیمی IPv6 برگردان
+            if (type === 'mixed') {
+                const halfCount = Math.ceil(count / 2);
+                const ipv4Servers = [...allGamesDNS.ipv4].sort(() => Math.random() - 0.5).slice(0, halfCount);
+                const ipv6Servers = [...allGamesDNS.ipv6].sort(() => Math.random() - 0.5).slice(0, count - halfCount);
+                
+                // ترکیب کردن IPv4 و IPv6 به صورت متناوب
+                const mixedServers = [];
+                const maxLength = Math.max(ipv4Servers.length, ipv6Servers.length);
+                
+                for (let i = 0; i < maxLength; i++) {
+                    if (i < ipv4Servers.length) mixedServers.push(ipv4Servers[i]);
+                    if (i < ipv6Servers.length) mixedServers.push(ipv6Servers[i]);
+                }
+                
+                return mixedServers.slice(0, count);
+            }
+            
             // Create a fresh shuffled array each time to ensure different results
             const shuffled = [...allGamesDNS[type]].sort(() => Math.random() - 0.5);
             return shuffled.slice(0, count);
@@ -3273,6 +3404,11 @@
 
         function displayAllGamesDNSResult(containerId, dnsServers, title) {
             const container = document.getElementById(containerId);
+            const device = document.getElementById('deviceSelect').value;
+            const deviceName = device === 'pc' ? 'کامپیوتر' : device === 'mobile' ? 'موبایل' : device === 'console' ? 'کنسول' : 'دستگاه';
+            const gameName = selectedGame || 'All Games';
+            const realDeviceInfo = getRealDeviceInfo();
+            
             container.innerHTML = `
                 <h3 style="color: #74b9ff; margin-bottom: 20px;">${title}</h3>
                 <div style="background: rgba(116, 185, 255, 0.1); border-radius: 10px; padding: 12px; margin-bottom: 15px; text-align: center; border: 1px solid rgba(116, 185, 255, 0.3);">
@@ -4991,11 +5127,19 @@
 
 
 
-        // Device Detection
+        // Enhanced Device Detection with Performance Optimization
         function detectDevice() {
             const userAgent = navigator.userAgent.toLowerCase();
-            const isMobile = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
-            const isTablet = /ipad|android(?!.*mobile)/i.test(userAgent);
+            const screenWidth = window.innerWidth;
+            const screenHeight = window.innerHeight;
+            const pixelRatio = window.devicePixelRatio || 1;
+            const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+            
+            // More accurate device detection
+            const isMobile = /android|webos|iphone|ipod|blackberry|iemobile|opera mini/i.test(userAgent) || 
+                            (isTouchDevice && screenWidth < 768);
+            const isTablet = /ipad|android(?!.*mobile)/i.test(userAgent) || 
+                           (isTouchDevice && screenWidth >= 768 && screenWidth < 1024);
             
             if (isMobile && !isTablet) {
                 deviceType = 'mobile';
@@ -5005,29 +5149,71 @@
                 deviceType = 'desktop';
             }
             
-            // Apply device-specific styles
+            // Store device info for later use
+            userInternetInfo.deviceType = deviceType;
+            userInternetInfo.screenWidth = screenWidth;
+            userInternetInfo.screenHeight = screenHeight;
+            userInternetInfo.pixelRatio = pixelRatio;
+            userInternetInfo.isTouchDevice = isTouchDevice;
+            
+            // Apply device-specific optimizations
             applyDeviceStyles();
             
-            console.log(`Device detected: ${deviceType}`);
+            console.log(`Device detected: ${deviceType} (${screenWidth}x${screenHeight}, ${pixelRatio}x DPR)`);
         }
 
         function applyDeviceStyles() {
             const body = document.body;
             body.classList.add(`device-${deviceType}`);
             
-            // Adjust UI elements based on device
+            // Performance optimizations based on device
             if (deviceType === 'mobile') {
-                // Mobile-specific adjustments
-                document.documentElement.style.setProperty('--mobile-padding', '10px');
+                // Mobile-specific optimizations
+                document.documentElement.style.setProperty('--mobile-padding', '8px');
                 document.documentElement.style.setProperty('--mobile-font-size', '14px');
+                
+                // Reduce animations for better performance
+                body.classList.add('reduced-motion');
+                
+                // Optimize touch interactions
+                body.style.touchAction = 'manipulation';
+                
+                // Prevent zoom on form inputs
+                const viewport = document.querySelector('meta[name="viewport"]');
+                if (viewport) {
+                    viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
+                }
+                
             } else if (deviceType === 'tablet') {
-                // Tablet-specific adjustments
-                document.documentElement.style.setProperty('--mobile-padding', '15px');
-                document.documentElement.style.setProperty('--mobile-font-size', '16px');
+                // Tablet-specific optimizations
+                document.documentElement.style.setProperty('--mobile-padding', '12px');
+                document.documentElement.style.setProperty('--mobile-font-size', '15px');
+                
+                body.style.touchAction = 'manipulation';
+                
             } else {
-                // Desktop-specific adjustments
+                // Desktop-specific optimizations
                 document.documentElement.style.setProperty('--mobile-padding', '20px');
                 document.documentElement.style.setProperty('--mobile-font-size', '16px');
+                
+                // Enable full animations on desktop
+                body.classList.add('full-animations');
+            }
+            
+            // Apply hardware acceleration for smooth animations
+            if (deviceType !== 'desktop') {
+                const style = document.createElement('style');
+                style.textContent = `
+                    .device-${deviceType} .btn,
+                    .device-${deviceType} .game-item,
+                    .device-${deviceType} .sidebar {
+                        transform: translateZ(0);
+                        -webkit-transform: translateZ(0);
+                        backface-visibility: hidden;
+                        -webkit-backface-visibility: hidden;
+                    }
+                `;
+                document.head.appendChild(style);
             }
         }
 
@@ -5056,26 +5242,109 @@
             return deviceInfo;
         }
 
-        // Initialize page
+        // Initialize page with performance optimizations
         document.addEventListener('DOMContentLoaded', function() {
-            // Detect device first
-            detectDevice();
+            // Performance optimization: Use requestIdleCallback if available
+            const initializeApp = () => {
+                try {
+                    // Detect device first
+                    detectDevice();
+                    
+                    // Load saved theme preference
+                    try {
+                        const savedTheme = localStorage.getItem('academi-theme');
+                        if (savedTheme === 'dark') {
+                            isDarkMode = true;
+                            document.body.classList.add('dark-mode');
+                            document.querySelector('.theme-toggle').textContent = '☀️';
+                        }
+                    } catch (e) {
+                        console.log('Could not load theme preference');
+                    }
+                    
+                    // Preload critical resources
+                    preloadCriticalResources();
+                    
+                    // Show loader for minimum time for better UX
+                    const minLoadTime = deviceType === 'mobile' ? 1500 : 2000;
+                    setTimeout(() => {
+                        hideLoader();
+                        
+                        // Initialize performance monitoring
+                        if (deviceType === 'mobile') {
+                            initMobileOptimizations();
+                        }
+                        
+                    }, minLoadTime);
+                    
+                } catch (error) {
+                    console.error('Error initializing app:', error);
+                    // Fallback: hide loader anyway
+                    setTimeout(hideLoader, 1000);
+                }
+            };
             
-            // Show loader for minimum 2 seconds for better UX
-            setTimeout(() => {
-                hideLoader();
-            }, 2000);
+            // Use requestIdleCallback for better performance, fallback to setTimeout
+            if (window.requestIdleCallback) {
+                requestIdleCallback(initializeApp, { timeout: 1000 });
+            } else {
+                setTimeout(initializeApp, 0);
+            }
         });
 
-        // Initialize Element SDK
+        // Preload critical resources
+        function preloadCriticalResources() {
+            // Preload fonts
+            const fontLink = document.createElement('link');
+            fontLink.rel = 'preload';
+            fontLink.as = 'font';
+            fontLink.type = 'font/woff2';
+            fontLink.crossOrigin = 'anonymous';
+            document.head.appendChild(fontLink);
+        }
+
+        // Mobile-specific optimizations
+        function initMobileOptimizations() {
+            // Reduce animation complexity on mobile
+            const style = document.createElement('style');
+            style.textContent = `
+                @media (max-width: 768px) {
+                    * {
+                        animation-duration: 0.2s !important;
+                        transition-duration: 0.2s !important;
+                    }
+                    
+                    .reduced-motion * {
+                        animation: none !important;
+                        transition: none !important;
+                    }
+                    
+                    .reduced-motion .btn:hover,
+                    .reduced-motion .game-item:hover {
+                        transform: none !important;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Add passive event listeners for better scroll performance
+            document.addEventListener('touchstart', function() {}, { passive: true });
+            document.addEventListener('touchmove', function() {}, { passive: true });
+        }
+
+        // Initialize Element SDK with error handling
         if (window.elementSdk) {
-            window.elementSdk.init({
-                defaultConfig,
-                onConfigChange,
-                mapToCapabilities,
-                mapToEditPanelValues
-            });
+            try {
+                window.elementSdk.init({
+                    defaultConfig,
+                    onConfigChange,
+                    mapToCapabilities,
+                    mapToEditPanelValues
+                });
+            } catch (error) {
+                console.error('Error initializing Element SDK:', error);
+            }
         }
     </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99e76a664106bd24',t:'MTc2MzEzMjgxNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99e7712545e5bd24',t:'MTc2MzEzMzA5Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
