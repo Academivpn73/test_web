@@ -651,17 +651,18 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.95);
             backdrop-filter: blur(20px);
-            transition: transform 0.3s ease-out;
+            transform: translateX(-100%);
+            transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 999;
             padding: 100px 0 20px 0;
             border-right: 2px solid rgba(255, 255, 255, 0.1);
             overflow-y: auto;
             overflow-x: hidden;
-            transform: translateX(-100%);
+            will-change: transform;
         }
 
         .sidebar.open {
-            transform: translateX(0) !important;
+            transform: translateX(0);
         }
 
         /* تنظیمات موبایل */
@@ -669,12 +670,12 @@
             .sidebar {
                 width: 280px;
                 padding: 80px 0 20px 0;
-                transition: transform 0.3s ease-out;
-                transform: translateX(-280px);
+                transform: translateX(-100%);
+                transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             }
             
             .sidebar.open {
-                transform: translateX(0) !important;
+                transform: translateX(0);
             }
         }
 
@@ -683,11 +684,12 @@
             .sidebar {
                 width: 260px;
                 padding: 70px 0 20px 0;
-                transform: translateX(-260px);
+                transform: translateX(-100%);
+                transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             }
             
             .sidebar.open {
-                transform: translateX(0) !important;
+                transform: translateX(0);
             }
         }
 
@@ -1365,6 +1367,17 @@
 
         /* Mobile Performance Optimizations */
         @media (max-width: 768px) {
+            /* Hardware acceleration for smooth animations */
+            .sidebar,
+            .hamburger-menu,
+            .game-item,
+            .btn {
+                transform: translateZ(0);
+                -webkit-transform: translateZ(0);
+                backface-visibility: hidden;
+                -webkit-backface-visibility: hidden;
+            }
+            
             .container {
                 padding: 10px;
             }
@@ -1383,6 +1396,11 @@
             .contact-item {
                 padding: 8px 15px;
                 font-size: 0.9rem;
+                transition: transform 0.15s ease;
+            }
+            
+            .contact-item:active {
+                transform: scale(0.98);
             }
             
             .site-title {
@@ -1410,6 +1428,7 @@
                 max-height: 250px;
                 overflow-y: auto;
                 -webkit-overflow-scrolling: touch;
+                scroll-behavior: smooth;
             }
             
             .game-item {
@@ -1421,6 +1440,13 @@
                 justify-content: center;
                 text-align: center;
                 line-height: 1.3;
+                transition: transform 0.15s ease, background-color 0.15s ease;
+                cursor: pointer;
+                -webkit-tap-highlight-color: transparent;
+            }
+            
+            .game-item:active {
+                transform: scale(0.96);
             }
 
             .dns-servers {
@@ -1463,6 +1489,11 @@
                 padding: 8px 15px;
                 min-width: 200px;
                 font-size: 0.9rem;
+                transition: transform 0.15s ease;
+            }
+            
+            .ad-feature:active {
+                transform: scale(0.98);
             }
             
             .ad-buttons {
@@ -1475,6 +1506,12 @@
                 padding: 12px 20px;
                 font-size: 0.9rem;
                 min-height: 48px;
+                transition: transform 0.15s ease;
+                -webkit-tap-highlight-color: transparent;
+            }
+            
+            .ad-btn-primary:active, .ad-btn-secondary:active {
+                transform: scale(0.98);
             }
             
             .form-input, .form-select {
@@ -1482,6 +1519,7 @@
                 padding: 15px 12px;
                 min-height: 48px;
                 border-radius: 10px;
+                transition: border-color 0.15s ease;
             }
             
             .btn {
@@ -1491,6 +1529,12 @@
                 margin: 10px 0;
                 min-height: 52px;
                 border-radius: 12px;
+                transition: transform 0.15s ease;
+                -webkit-tap-highlight-color: transparent;
+            }
+            
+            .btn:active {
+                transform: scale(0.98);
             }
             
             .btn strong {
@@ -1504,6 +1548,12 @@
                 height: 50px;
                 top: 15px;
                 left: 15px;
+                transition: transform 0.15s ease;
+                -webkit-tap-highlight-color: transparent;
+            }
+            
+            .hamburger-menu:active {
+                transform: scale(0.95);
             }
             
             .theme-toggle {
@@ -1512,15 +1562,12 @@
                 top: 15px;
                 right: 15px;
                 font-size: 1.2rem;
+                transition: transform 0.15s ease;
+                -webkit-tap-highlight-color: transparent;
             }
             
-            .sidebar {
-                width: 280px;
-                left: -280px;
-            }
-            
-            .sidebar.open {
-                transform: translateX(280px);
+            .theme-toggle:active {
+                transform: scale(0.95);
             }
             
             .radio-container {
@@ -1531,6 +1578,12 @@
                 padding: 0.8rem 1rem;
                 font-size: 1rem;
                 min-height: 44px;
+                transition: transform 0.15s ease, background-color 0.15s ease;
+                -webkit-tap-highlight-color: transparent;
+            }
+            
+            .radio-container label:active {
+                transform: scale(0.98);
             }
             
             .menu-icon {
@@ -2412,10 +2465,10 @@
                 if (backdrop) {
                     backdrop.style.opacity = '0';
                     setTimeout(() => {
-                        if (backdrop.parentNode) {
+                        if (backdrop && backdrop.parentNode) {
                             backdrop.parentNode.removeChild(backdrop);
                         }
-                    }, 300);
+                    }, 200);
                 }
                 
             } else {
@@ -2424,8 +2477,8 @@
                 hamburger.classList.add('menu-open');
                 
                 // Provide haptic feedback on mobile
-                if (navigator.vibrate) {
-                    navigator.vibrate(30);
+                if (navigator.vibrate && window.innerWidth <= 768) {
+                    navigator.vibrate(20);
                 }
                 
                 // Add backdrop for mobile
@@ -2441,24 +2494,28 @@
                             left: 0;
                             width: 100%;
                             height: 100%;
-                            background: rgba(0, 0, 0, 0.6);
+                            background: rgba(0, 0, 0, 0.5);
                             z-index: 998;
                             opacity: 0;
-                            transition: opacity 0.3s ease;
-                            backdrop-filter: blur(3px);
+                            transition: opacity 0.2s ease;
+                            backdrop-filter: blur(2px);
+                            -webkit-backdrop-filter: blur(2px);
                         `;
-                        backdrop.onclick = toggleMenu;
-                        backdrop.ontouchstart = (e) => {
+                        
+                        // بهینه‌سازی event listeners
+                        backdrop.addEventListener('click', toggleMenu, { passive: true });
+                        backdrop.addEventListener('touchstart', (e) => {
                             e.preventDefault();
                             toggleMenu();
-                        };
+                        }, { passive: false });
+                        
                         document.body.appendChild(backdrop);
                     }
                     
-                    // Show backdrop
-                    setTimeout(() => {
+                    // Show backdrop with requestAnimationFrame for smooth animation
+                    requestAnimationFrame(() => {
                         backdrop.style.opacity = '1';
-                    }, 10);
+                    });
                 }
             }
         }
@@ -2493,41 +2550,46 @@
         }
 
         function showSection(sectionName) {
-            // Hide all sections
-            document.querySelectorAll('.section').forEach(section => {
-                section.classList.remove('active');
-            });
-            
-            // Hide ad banner when entering any section
-            const adBanner = document.getElementById('adBanner');
-            if (sectionName && sectionName !== '') {
-                const targetSection = document.getElementById(sectionName);
-                if (targetSection) {
-                    targetSection.classList.add('active');
+            // Performance optimization: Use requestAnimationFrame for smooth transitions
+            requestAnimationFrame(() => {
+                // Hide all sections
+                document.querySelectorAll('.section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                // Hide ad banner when entering any section
+                const adBanner = document.getElementById('adBanner');
+                if (sectionName && sectionName !== '') {
+                    const targetSection = document.getElementById(sectionName);
+                    if (targetSection) {
+                        targetSection.classList.add('active');
+                    }
+                    adBanner.style.display = 'none';
+                } else {
+                    // Show home page (no sections active, show ad banner)
+                    adBanner.style.display = 'block';
                 }
-                adBanner.style.display = 'none';
-            } else {
-                // Show home page (no sections active, show ad banner)
-                adBanner.style.display = 'block';
-            }
-            
-            // Update radio button selection manually
-            const radioButtons = document.querySelectorAll('input[name="menu-radio"]');
-            radioButtons.forEach(radio => {
-                radio.checked = false; // Reset all
+                
+                // Update radio button selection manually
+                const radioButtons = document.querySelectorAll('input[name="menu-radio"]');
+                radioButtons.forEach(radio => {
+                    radio.checked = false; // Reset all
+                });
+                
+                // Set the correct radio button
+                const targetRadio = sectionName === '' ? 
+                    document.getElementById('radio-home') : 
+                    document.getElementById(`radio-${sectionName}`);
+                
+                if (targetRadio) {
+                    targetRadio.checked = true;
+                }
+                
+                // Close menu after selection with slight delay for better UX
+                setTimeout(() => {
+                    toggleMenu();
+                }, 100);
             });
-            
-            // Set the correct radio button
-            const targetRadio = sectionName === '' ? 
-                document.getElementById('radio-home') : 
-                document.getElementById(`radio-${sectionName}`);
-            
-            if (targetRadio) {
-                targetRadio.checked = true;
-            }
-            
-            // Close menu after selection
-            toggleMenu();
         }
 
         function showTutorial() {
@@ -5267,5 +5329,5 @@
             }
         }
     </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99e793bd2249804d',t:'MTc2MzEzNDUwOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99e7969fb2b3804d',t:'MTc2MzEzNDYyNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
