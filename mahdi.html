@@ -646,12 +646,12 @@
         .sidebar {
             position: fixed;
             top: 0;
-            left: -350px;
+            left: 0;
             width: 350px;
             height: 100%;
             background: rgba(0, 0, 0, 0.95);
             backdrop-filter: blur(20px);
-            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             z-index: 999;
             padding: 100px 0 20px 0;
             border-right: 2px solid rgba(255, 255, 255, 0.1);
@@ -661,7 +661,6 @@
         }
 
         .sidebar.open {
-            left: 0;
             transform: translateX(0);
         }
 
@@ -669,9 +668,10 @@
         @media (max-width: 768px) {
             .sidebar {
                 width: 280px;
-                left: -280px;
-                transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-                transform: translateX(-100%);
+                transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+                will-change: transform;
+                backface-visibility: hidden;
+                -webkit-backface-visibility: hidden;
             }
             
             .sidebar.open {
@@ -679,33 +679,39 @@
             }
             
             .sidebar.opening {
-                animation: slideInFromLeft 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+                animation: slideInFromLeft 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
             }
             
             .sidebar.closing {
-                animation: slideOutToLeft 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+                animation: slideOutToLeft 0.4s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards;
             }
         }
 
         @keyframes slideInFromLeft {
             0% {
-                transform: translateX(-100%);
+                transform: translateX(-100%) scale(0.95);
+                opacity: 0;
+            }
+            50% {
                 opacity: 0.8;
             }
             100% {
-                transform: translateX(0);
+                transform: translateX(0) scale(1);
                 opacity: 1;
             }
         }
 
         @keyframes slideOutToLeft {
             0% {
-                transform: translateX(0);
+                transform: translateX(0) scale(1);
                 opacity: 1;
             }
-            100% {
-                transform: translateX(-100%);
+            50% {
                 opacity: 0.8;
+            }
+            100% {
+                transform: translateX(-100%) scale(0.95);
+                opacity: 0;
             }
         }
 
@@ -807,7 +813,7 @@
             padding: 1rem 1.5rem;
             position: relative;
             color: rgba(255, 255, 255, 0.7);
-            transition: all 0.3s ease-in-out;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             font-size: 1.1rem;
             font-weight: 500;
             display: flex;
@@ -817,19 +823,67 @@
             margin: 2px 0;
             pointer-events: auto;
             z-index: 5;
+            opacity: 0;
+            transform: translateX(-20px);
+            animation: slideInMenuItem 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .radio-container label:nth-child(2) { animation-delay: 0.1s; }
+        .radio-container label:nth-child(4) { animation-delay: 0.15s; }
+        .radio-container label:nth-child(6) { animation-delay: 0.2s; }
+        .radio-container label:nth-child(8) { animation-delay: 0.25s; }
+        .radio-container label:nth-child(10) { animation-delay: 0.3s; }
+        .radio-container label:nth-child(12) { animation-delay: 0.35s; }
+        .radio-container label:nth-child(14) { animation-delay: 0.4s; }
+        .radio-container label:nth-child(16) { animation-delay: 0.45s; }
+
+        @keyframes slideInMenuItem {
+            0% {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
         .radio-container label:hover {
             color: rgba(255, 255, 255, 0.9);
             background: rgba(255, 255, 255, 0.05);
-            transform: translateX(5px);
+            transform: translateX(5px) scale(1.02);
+            box-shadow: 0 4px 15px rgba(116, 185, 255, 0.2);
         }
 
         .radio-container input:checked + label {
             color: var(--main-color);
-            background: rgba(116, 185, 255, 0.1);
+            background: rgba(116, 185, 255, 0.15);
             font-weight: 600;
-            transform: translateX(8px);
+            transform: translateX(8px) scale(1.02);
+            box-shadow: 0 4px 20px rgba(116, 185, 255, 0.3);
+        }
+
+        /* انیمیشن خاص برای موبایل */
+        @media (max-width: 768px) {
+            .radio-container label {
+                padding: 0.8rem 1rem;
+                font-size: 1rem;
+                min-height: 44px;
+                animation-duration: 0.3s;
+            }
+            
+            .radio-container label:hover {
+                transform: translateX(3px) scale(1.01);
+            }
+            
+            .radio-container input:checked + label {
+                transform: translateX(5px) scale(1.01);
+            }
+            
+            .menu-icon {
+                font-size: 1.1rem;
+                width: 20px;
+            }
         }
 
         .radio-container input:nth-of-type(1):checked ~ .glider-container .glider {
@@ -2376,38 +2430,37 @@
                 
                 if (isOpen) {
                     // بستن منو با انیمیشن
-                    if (deviceType === 'mobile') {
-                        sidebar.classList.add('closing');
-                        sidebar.classList.remove('opening');
-                    }
-                    sidebar.classList.remove('open');
+                    sidebar.classList.add('closing');
+                    sidebar.classList.remove('opening', 'open');
                     hamburger.classList.remove('menu-open');
+                    
+                    // Remove backdrop
+                    const backdrop = document.querySelector('.menu-backdrop');
+                    if (backdrop) {
+                        backdrop.style.opacity = '0';
+                        setTimeout(() => {
+                            if (backdrop.parentNode) {
+                                backdrop.parentNode.removeChild(backdrop);
+                            }
+                        }, 400);
+                    }
+                    
                 } else {
                     // باز کردن منو با انیمیشن
-                    if (deviceType === 'mobile') {
-                        sidebar.classList.add('opening');
-                        sidebar.classList.remove('closing');
-                    }
-                    sidebar.classList.add('open');
+                    sidebar.classList.add('opening', 'open');
+                    sidebar.classList.remove('closing');
                     hamburger.classList.add('menu-open');
                     
                     // Provide haptic feedback on mobile
-                    if (deviceType === 'mobile' && navigator.vibrate) {
+                    if ((deviceType === 'mobile' || deviceType === 'tablet') && navigator.vibrate) {
                         navigator.vibrate(30);
                     }
-                }
-                
-                // پاک کردن کلاس‌های انیمیشن پس از اتمام
-                setTimeout(() => {
-                    sidebar.classList.remove('opening', 'closing');
-                }, 400);
-                
-                // Add backdrop for mobile
-                if (deviceType === 'mobile') {
-                    let backdrop = document.querySelector('.menu-backdrop');
                     
-                    if (!isOpen) {
-                        // Create backdrop
+                    // Add backdrop for mobile and tablet
+                    if (deviceType === 'mobile' || deviceType === 'tablet') {
+                        let backdrop = document.querySelector('.menu-backdrop');
+                        
+                        // Create backdrop if it doesn't exist
                         if (!backdrop) {
                             backdrop = document.createElement('div');
                             backdrop.className = 'menu-backdrop';
@@ -2417,31 +2470,32 @@
                                 left: 0;
                                 width: 100%;
                                 height: 100%;
-                                background: rgba(0, 0, 0, 0.5);
+                                background: rgba(0, 0, 0, 0.6);
                                 z-index: 998;
                                 opacity: 0;
-                                transition: opacity 0.4s ease;
-                                backdrop-filter: blur(2px);
+                                transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                                backdrop-filter: blur(3px);
+                                -webkit-backdrop-filter: blur(3px);
                             `;
                             backdrop.onclick = toggleMenu;
+                            backdrop.ontouchstart = (e) => {
+                                e.preventDefault();
+                                toggleMenu();
+                            };
                             document.body.appendChild(backdrop);
                         }
                         
-                        // Show backdrop
-                        setTimeout(() => {
+                        // Show backdrop with animation
+                        requestAnimationFrame(() => {
                             backdrop.style.opacity = '1';
-                        }, 10);
-                        
-                    } else if (backdrop) {
-                        // Hide backdrop
-                        backdrop.style.opacity = '0';
-                        setTimeout(() => {
-                            if (backdrop.parentNode) {
-                                backdrop.parentNode.removeChild(backdrop);
-                            }
-                        }, 400);
+                        });
                     }
                 }
+                
+                // پاک کردن کلاس‌های انیمیشن پس از اتمام
+                setTimeout(() => {
+                    sidebar.classList.remove('opening', 'closing');
+                }, 450);
             });
         }
 
@@ -5249,5 +5303,5 @@
             }
         }
     </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99e786d8156edca0',t:'MTc2MzEzMzk4MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99e78e86071f804d',t:'MTc2MzEzNDI5Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
