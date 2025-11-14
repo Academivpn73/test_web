@@ -1289,376 +1289,203 @@
 
         /* Mobile Performance Optimizations */
         @media (max-width: 768px) {
-            * {
-                -webkit-tap-highlight-color: transparent;
-                -webkit-touch-callout: none;
-                -webkit-user-select: none;
-                -moz-user-select: none;
-                -ms-user-select: none;
-                user-select: none;
-            }
-            
-            input, textarea, select {
-                -webkit-user-select: text;
-                -moz-user-select: text;
-                -ms-user-select: text;
-                user-select: text;
-            }
-            
             .container {
-                padding: 8px;
-                will-change: transform;
+                padding: 10px;
             }
             
             .header {
-                padding: 15px 10px;
-                margin-bottom: 15px;
-                will-change: transform;
+                padding: 20px 15px;
+                margin-bottom: 20px;
             }
             
             .contact-info {
                 flex-direction: column;
                 align-items: center;
-                gap: 8px;
+                gap: 10px;
             }
             
             .contact-item {
-                padding: 6px 12px;
-                font-size: 0.85rem;
-                min-height: 36px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
+                padding: 8px 15px;
+                font-size: 0.9rem;
             }
             
             .site-title {
-                font-size: 1.6rem;
-                line-height: 1.2;
+                font-size: 1.8rem;
             }
             
             .logo {
-                width: 50px;
-                height: 50px;
+                width: 60px;
+                height: 60px;
             }
             
             .section {
-                padding: 15px 10px;
-                margin-bottom: 15px;
-                will-change: transform;
+                padding: 20px 15px;
+                margin-bottom: 20px;
             }
             
             .section-title {
-                font-size: 1.3rem;
-                margin-bottom: 12px;
-                line-height: 1.3;
+                font-size: 1.5rem;
+                margin-bottom: 15px;
             }
             
             .game-grid {
-                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-                gap: 8px;
-                max-height: 200px;
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 10px;
+                max-height: 250px;
                 overflow-y: auto;
                 -webkit-overflow-scrolling: touch;
             }
             
             .game-item {
-                padding: 8px;
-                font-size: 0.8rem;
-                min-height: 40px;
+                padding: 12px;
+                font-size: 0.9rem;
+                min-height: 50px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 text-align: center;
-                line-height: 1.2;
-                cursor: pointer;
-                -webkit-tap-highlight-color: rgba(116, 185, 255, 0.3);
+                line-height: 1.3;
             }
 
             .dns-servers {
                 grid-template-columns: 1fr;
-                gap: 8px;
+                gap: 10px;
             }
             
             .dns-pair {
+                padding: 15px;
+                margin-bottom: 12px;
+            }
+            
+            .dns-pair-title {
+                font-size: 1rem;
+                margin-bottom: 10px;
+            }
+            
+            .dns-server {
                 padding: 12px;
                 margin-bottom: 8px;
             }
             
-            .dns-pair-title {
-                font-size: 0.9rem;
-                margin-bottom: 8px;
-                line-height: 1.3;
-            }
-            
-            .dns-server {
-                padding: 10px;
-                margin-bottom: 6px;
-            }
-            
             .dns-server-value {
-                font-size: 0.8rem;
+                font-size: 0.9rem;
                 word-break: break-all;
-                line-height: 1.2;
-                padding: 6px;
+                line-height: 1.3;
+                padding: 8px;
                 background: rgba(0, 0, 0, 0.2);
-                border-radius: 4px;
+                border-radius: 6px;
                 font-family: 'Courier New', monospace;
             }
 
-            .status-info {
-                grid-template-columns: 1fr;
-                gap: 8px;
-            }
-            
             .ad-features {
-                gap: 8px;
+                gap: 10px;
                 flex-direction: column;
                 align-items: center;
             }
             
             .ad-feature {
-                padding: 6px 10px;
-                min-width: 180px;
-                font-size: 0.8rem;
+                padding: 8px 15px;
+                min-width: 200px;
+                font-size: 0.9rem;
             }
             
             .ad-buttons {
                 flex-direction: column;
-                gap: 8px;
+                gap: 10px;
             }
             
             .ad-btn-primary, .ad-btn-secondary {
                 min-width: 100%;
-                padding: 10px 15px;
-                font-size: 0.85rem;
-                min-height: 44px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
+                padding: 12px 20px;
+                font-size: 0.9rem;
+                min-height: 48px;
             }
             
             .form-input, .form-select {
                 font-size: 16px; /* Prevent zoom on iOS */
-                padding: 12px 10px;
-                min-height: 44px;
-                border-radius: 8px;
-                -webkit-appearance: none;
-                -moz-appearance: none;
-                appearance: none;
+                padding: 15px 12px;
+                min-height: 48px;
+                border-radius: 10px;
             }
             
             .btn {
                 width: 100%;
                 height: auto;
-                padding: 12px;
-                margin: 8px 0;
-                min-height: 48px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                border-radius: 10px;
-                will-change: transform;
-                -webkit-tap-highlight-color: rgba(116, 185, 255, 0.3);
-            }
-            
-            .btn strong {
-                font-size: 13px;
-                text-align: center;
-                line-height: 1.3;
-            }
-            
-            /* Device-specific optimizations */
-            .device-mobile .btn {
-                padding: 14px 12px;
-                min-height: 50px;
-                border-radius: 10px;
-                font-size: 16px;
-                transform: translateZ(0);
-                -webkit-transform: translateZ(0);
-            }
-            
-            .device-mobile .btn:active {
-                transform: scale(0.98) translateZ(0);
-                -webkit-transform: scale(0.98) translateZ(0);
-            }
-            
-            .device-mobile .btn strong {
-                font-size: 14px;
-                line-height: 1.2;
-            }
-            
-            .device-tablet .btn {
-                padding: 14px 18px;
-                min-height: 48px;
-            }
-            
-            .hamburger-menu {
-                width: 45px;
-                height: 45px;
-                top: 12px;
-                left: 12px;
-                -webkit-tap-highlight-color: rgba(116, 185, 255, 0.3);
-            }
-            
-            .theme-toggle {
-                width: 45px;
-                height: 45px;
-                top: 12px;
-                right: 12px;
-                font-size: 1.1rem;
-                -webkit-tap-highlight-color: rgba(116, 185, 255, 0.3);
-            }
-            
-            .sidebar {
-                width: 260px;
-                left: -260px;
-                will-change: transform;
-                -webkit-transform: translateZ(0);
-                transform: translateZ(0);
-            }
-            
-            .sidebar.open {
-                -webkit-transform: translateX(260px) translateZ(0);
-                transform: translateX(260px) translateZ(0);
-            }
-            
-            .radio-container {
-                margin: 12px;
-                padding-left: 0.2rem;
-            }
-            
-            .radio-container label {
-                padding: 0.7rem 0.8rem;
-                font-size: 0.9rem;
-                min-height: 40px;
-                -webkit-tap-highlight-color: rgba(116, 185, 255, 0.3);
-            }
-            
-            .menu-icon {
-                font-size: 1rem;
-                width: 18px;
-            }
-            
-            .footer {
-                padding: 15px 10px;
-                margin-top: 20px;
-            }
-            
-            .footer-section {
-                margin-bottom: 12px;
-            }
-            
-            .footer-title {
-                font-size: 1rem;
-            }
-            
-            /* DNS Result Mobile Optimization */
-            .dns-result {
-                padding: 10px;
-                margin-top: 12px;
+                padding: 15px;
+                margin: 10px 0;
+                min-height: 52px;
                 border-radius: 12px;
             }
             
-            .dns-result h3 {
-                font-size: 1.1rem;
-                margin-bottom: 12px;
+            .btn strong {
+                font-size: 14px;
                 text-align: center;
                 line-height: 1.3;
-                color: #74b9ff;
             }
             
-            /* DNS Pair Mobile Layout - Optimized */
-            .device-mobile .dns-pair {
-                background: rgba(255, 255, 255, 0.1);
-                border-radius: 10px;
-                padding: 10px;
-                margin-bottom: 8px;
-                border: 1px solid rgba(255, 255, 255, 0.2);
-                will-change: transform;
+            .hamburger-menu {
+                width: 50px;
+                height: 50px;
+                top: 15px;
+                left: 15px;
             }
             
-            .device-mobile .dns-pair-title {
-                font-size: 0.85rem;
-                margin-bottom: 8px;
-                text-align: center;
-                color: #74b9ff;
-                font-weight: bold;
-                line-height: 1.2;
+            .theme-toggle {
+                width: 50px;
+                height: 50px;
+                top: 15px;
+                right: 15px;
+                font-size: 1.2rem;
             }
             
-            /* DNS Server Mobile Layout - Optimized */
-            .device-mobile .dns-server {
-                background: rgba(255, 255, 255, 0.08);
-                border-radius: 6px;
-                padding: 8px;
-                margin-bottom: 6px;
-                border: 1px solid rgba(255, 255, 255, 0.15);
-                width: 100%;
-            }
-            
-            .device-mobile .dns-server-label {
-                font-size: 0.75rem;
-                opacity: 0.8;
-                margin-bottom: 4px;
-                text-align: center;
-            }
-            
-            .device-mobile .dns-server-value {
-                font-size: 0.8rem;
-                font-weight: bold;
-                margin-bottom: 6px;
-                word-break: break-all;
-                font-family: 'Courier New', monospace;
-                line-height: 1.2;
-                color: #00b894;
-                background: rgba(0, 0, 0, 0.3);
-                padding: 6px;
-                border-radius: 4px;
-                text-align: center;
-                letter-spacing: 0.3px;
-            }
-            
-            .device-mobile .dns-ping {
-                display: flex;
-                align-items: center;
-                gap: 4px;
-                font-size: 0.75rem;
-                justify-content: center;
-                margin-top: 4px;
-            }
-            
-            .device-mobile .ping-indicator {
-                width: 6px;
-                height: 6px;
-            }
-            
-            /* Performance optimizations */
-            .device-mobile * {
-                will-change: auto;
-            }
-            
-            .device-mobile .btn,
-            .device-mobile .game-item,
-            .device-mobile .contact-item,
-            .device-mobile .radio-container label {
-                will-change: transform;
-            }
-            
-            /* Smooth scrolling */
-            .game-grid,
             .sidebar {
-                -webkit-overflow-scrolling: touch;
-                scroll-behavior: smooth;
+                width: 280px;
+                left: -280px;
             }
             
-            /* Reduce animations on mobile for better performance */
-            .device-mobile .btn-stars,
-            .device-mobile .btn-glow {
-                display: none;
+            .sidebar.open {
+                transform: translateX(280px);
             }
             
-            .device-mobile .btn-container-stars {
-                display: none;
+            .radio-container {
+                margin: 15px;
+            }
+            
+            .radio-container label {
+                padding: 0.8rem 1rem;
+                font-size: 1rem;
+                min-height: 44px;
+            }
+            
+            .menu-icon {
+                font-size: 1.1rem;
+                width: 20px;
+            }
+            
+            .footer {
+                padding: 20px 15px;
+                margin-top: 30px;
+            }
+            
+            .footer-section {
+                margin-bottom: 15px;
+            }
+            
+            .footer-title {
+                font-size: 1.1rem;
+            }
+            
+            .dns-result {
+                padding: 15px;
+                margin-top: 15px;
+                border-radius: 15px;
+            }
+            
+            .dns-result h3 {
+                font-size: 1.3rem;
+                margin-bottom: 15px;
+                text-align: center;
+                color: #74b9ff;
             }
         }
         
@@ -5346,5 +5173,5 @@
             }
         }
     </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99e7712545e5bd24',t:'MTc2MzEzMzA5Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99e7762df734bd24',t:'MTc2MzEzMzI5OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
