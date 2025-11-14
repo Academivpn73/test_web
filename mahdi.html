@@ -651,7 +651,7 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.95);
             backdrop-filter: blur(20px);
-            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: transform 0.3s ease-out;
             z-index: 999;
             padding: 100px 0 20px 0;
             border-right: 2px solid rgba(255, 255, 255, 0.1);
@@ -661,57 +661,33 @@
         }
 
         .sidebar.open {
-            transform: translateX(0);
+            transform: translateX(0) !important;
         }
 
-        /* انیمیشن منو برای موبایل */
+        /* تنظیمات موبایل */
         @media (max-width: 768px) {
             .sidebar {
                 width: 280px;
-                transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-                will-change: transform;
-                backface-visibility: hidden;
-                -webkit-backface-visibility: hidden;
+                padding: 80px 0 20px 0;
+                transition: transform 0.3s ease-out;
+                transform: translateX(-280px);
             }
             
             .sidebar.open {
-                transform: translateX(0);
-            }
-            
-            .sidebar.opening {
-                animation: slideInFromLeft 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
-            }
-            
-            .sidebar.closing {
-                animation: slideOutToLeft 0.4s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards;
+                transform: translateX(0) !important;
             }
         }
 
-        @keyframes slideInFromLeft {
-            0% {
-                transform: translateX(-100%) scale(0.95);
-                opacity: 0;
+        /* تنظیمات موبایل کوچک */
+        @media (max-width: 480px) {
+            .sidebar {
+                width: 260px;
+                padding: 70px 0 20px 0;
+                transform: translateX(-260px);
             }
-            50% {
-                opacity: 0.8;
-            }
-            100% {
-                transform: translateX(0) scale(1);
-                opacity: 1;
-            }
-        }
-
-        @keyframes slideOutToLeft {
-            0% {
-                transform: translateX(0) scale(1);
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.8;
-            }
-            100% {
-                transform: translateX(-100%) scale(0.95);
-                opacity: 0;
+            
+            .sidebar.open {
+                transform: translateX(0) !important;
             }
         }
 
@@ -2424,79 +2400,67 @@
             const sidebar = document.getElementById('sidebar');
             const hamburger = document.querySelector('.hamburger-menu');
             
-            // Performance optimization: Use requestAnimationFrame for smooth animation
-            requestAnimationFrame(() => {
-                const isOpen = sidebar.classList.contains('open');
+            const isOpen = sidebar.classList.contains('open');
+            
+            if (isOpen) {
+                // بستن منو
+                sidebar.classList.remove('open');
+                hamburger.classList.remove('menu-open');
                 
-                if (isOpen) {
-                    // بستن منو با انیمیشن
-                    sidebar.classList.add('closing');
-                    sidebar.classList.remove('opening', 'open');
-                    hamburger.classList.remove('menu-open');
-                    
-                    // Remove backdrop
-                    const backdrop = document.querySelector('.menu-backdrop');
-                    if (backdrop) {
-                        backdrop.style.opacity = '0';
-                        setTimeout(() => {
-                            if (backdrop.parentNode) {
-                                backdrop.parentNode.removeChild(backdrop);
-                            }
-                        }, 400);
-                    }
-                    
-                } else {
-                    // باز کردن منو با انیمیشن
-                    sidebar.classList.add('opening', 'open');
-                    sidebar.classList.remove('closing');
-                    hamburger.classList.add('menu-open');
-                    
-                    // Provide haptic feedback on mobile
-                    if ((deviceType === 'mobile' || deviceType === 'tablet') && navigator.vibrate) {
-                        navigator.vibrate(30);
-                    }
-                    
-                    // Add backdrop for mobile and tablet
-                    if (deviceType === 'mobile' || deviceType === 'tablet') {
-                        let backdrop = document.querySelector('.menu-backdrop');
-                        
-                        // Create backdrop if it doesn't exist
-                        if (!backdrop) {
-                            backdrop = document.createElement('div');
-                            backdrop.className = 'menu-backdrop';
-                            backdrop.style.cssText = `
-                                position: fixed;
-                                top: 0;
-                                left: 0;
-                                width: 100%;
-                                height: 100%;
-                                background: rgba(0, 0, 0, 0.6);
-                                z-index: 998;
-                                opacity: 0;
-                                transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-                                backdrop-filter: blur(3px);
-                                -webkit-backdrop-filter: blur(3px);
-                            `;
-                            backdrop.onclick = toggleMenu;
-                            backdrop.ontouchstart = (e) => {
-                                e.preventDefault();
-                                toggleMenu();
-                            };
-                            document.body.appendChild(backdrop);
+                // Remove backdrop
+                const backdrop = document.querySelector('.menu-backdrop');
+                if (backdrop) {
+                    backdrop.style.opacity = '0';
+                    setTimeout(() => {
+                        if (backdrop.parentNode) {
+                            backdrop.parentNode.removeChild(backdrop);
                         }
-                        
-                        // Show backdrop with animation
-                        requestAnimationFrame(() => {
-                            backdrop.style.opacity = '1';
-                        });
-                    }
+                    }, 300);
                 }
                 
-                // پاک کردن کلاس‌های انیمیشن پس از اتمام
-                setTimeout(() => {
-                    sidebar.classList.remove('opening', 'closing');
-                }, 450);
-            });
+            } else {
+                // باز کردن منو
+                sidebar.classList.add('open');
+                hamburger.classList.add('menu-open');
+                
+                // Provide haptic feedback on mobile
+                if (navigator.vibrate) {
+                    navigator.vibrate(30);
+                }
+                
+                // Add backdrop for mobile
+                if (window.innerWidth <= 768) {
+                    let backdrop = document.querySelector('.menu-backdrop');
+                    
+                    if (!backdrop) {
+                        backdrop = document.createElement('div');
+                        backdrop.className = 'menu-backdrop';
+                        backdrop.style.cssText = `
+                            position: fixed;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            background: rgba(0, 0, 0, 0.6);
+                            z-index: 998;
+                            opacity: 0;
+                            transition: opacity 0.3s ease;
+                            backdrop-filter: blur(3px);
+                        `;
+                        backdrop.onclick = toggleMenu;
+                        backdrop.ontouchstart = (e) => {
+                            e.preventDefault();
+                            toggleMenu();
+                        };
+                        document.body.appendChild(backdrop);
+                    }
+                    
+                    // Show backdrop
+                    setTimeout(() => {
+                        backdrop.style.opacity = '1';
+                    }, 10);
+                }
+            }
         }
 
         function toggleTheme() {
@@ -5303,5 +5267,5 @@
             }
         }
     </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99e78e86071f804d',t:'MTc2MzEzNDI5Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99e793bd2249804d',t:'MTc2MzEzNDUwOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
